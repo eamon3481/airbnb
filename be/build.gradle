@@ -17,6 +17,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compile 'mysql:mysql-connector-java:8.0.19'
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.0'
 }
 
 test {
