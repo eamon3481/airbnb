@@ -28,4 +28,10 @@ public class ReserveController {
                 1L, new Date(2021, 06, 01), new Date(2021, 06, 10), 2, 0, 0);
     }
 
+    @PostMapping
+    public ReserveRequest reserve(@RequestBody ReserveRequest reserveRequest) {
+        return reserveRequest;
+    }
+
+
 }
