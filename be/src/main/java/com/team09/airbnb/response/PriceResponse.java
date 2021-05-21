@@ -31,7 +31,7 @@ public class PriceResponse {
     public Map<BigDecimal, Integer> getPrices() {
         BigDecimal price = minPrice;
         BigDecimal unit = maxPrice.subtract(minPrice).divide(BigDecimal.valueOf(fraction));
-        for (int i = 0; i < fraction; price.add(unit), i++) {
+        for (int i = 0; i < fraction; price = price.add(unit), i++) {
             prices.put(price, i + 1);
         }
         return prices;
