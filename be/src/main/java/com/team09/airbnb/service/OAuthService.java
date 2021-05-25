@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class OauthService {
+public class OAuthService {
 
-    private final Logger logger = LoggerFactory.getLogger(OauthService.class);
+    private final Logger logger = LoggerFactory.getLogger(OAuthService.class);
 
     private final String GITHUB_ACCESS_TOKEN_URI = "https://github.com/login/oauth/access_token";
     private final String GITHUB_USER_URI = "https://api.github.com/user";
@@ -21,7 +21,7 @@ public class OauthService {
     private final String CLIENT_ID;
     private final String CLIENT_SECRET;
 
-    public OauthService(Environment environment) {
+    public OAuthService(Environment environment) {
         this.CLIENT_ID = environment.getProperty("github.client.id");
         this.CLIENT_SECRET = environment.getProperty("github.client.secret");
     }
@@ -31,7 +31,7 @@ public class OauthService {
         logger.info("Access Token : {} ", accessToken);
         OAuthUser OAuthUser = getGithubUser(accessToken);
         logger.info("User : {} ", OAuthUser);
-        return "JWT token will be returned";
+        return JWTBuilder.create(OAuthUser);
     }
 
     public OAuthUser getGithubUser(AccessTokenResponse accessToken) {
