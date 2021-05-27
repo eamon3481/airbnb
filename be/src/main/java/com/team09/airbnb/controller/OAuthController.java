@@ -1,5 +1,6 @@
 package com.team09.airbnb.controller;
 
+import com.team09.airbnb.response.JWTResponse;
 import com.team09.airbnb.service.OAuthService;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public class OAuthController {
     }
 
     @GetMapping("/login")
-    public String jwtRequest(@RequestParam String code) {
+    public JWTResponse jwtRequest(@RequestParam String code) {
         return oauthService.createJWT(code);
     }
 

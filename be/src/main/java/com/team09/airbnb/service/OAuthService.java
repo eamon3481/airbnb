@@ -3,6 +3,7 @@ package com.team09.airbnb.service;
 import com.team09.airbnb.domain.login.OAuthUser;
 import com.team09.airbnb.request.AccessTokenRequest;
 import com.team09.airbnb.request.AccessTokenResponse;
+import com.team09.airbnb.response.JWTResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
@@ -26,12 +27,12 @@ public class OAuthService {
         this.CLIENT_SECRET = environment.getProperty("github.client.secret");
     }
 
-    public String createJWT(String code) {
+    public JWTResponse createJWT(String code) {
         AccessTokenResponse accessToken = getAccessToken(code);
         logger.info("Access Token : {} ", accessToken);
         OAuthUser OAuthUser = getGithubUser(accessToken);
         logger.info("User : {} ", OAuthUser);
-        return JWTBuilder.create(OAuthUser);
+        return new JWTResponse(JWTBuilder.create(OAuthUser), OAuthUser);
     }
 
     public OAuthUser getGithubUser(AccessTokenResponse accessToken) {
