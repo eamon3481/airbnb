@@ -1,6 +1,6 @@
 package com.team09.airbnb.service;
 
-import com.team09.airbnb.domain.login.OAuthUser;
+import com.team09.airbnb.domain.login.User;
 import com.team09.airbnb.request.AccessTokenRequest;
 import com.team09.airbnb.request.AccessTokenResponse;
 import com.team09.airbnb.response.JWTResponse;
@@ -30,12 +30,12 @@ public class OAuthService {
     public JWTResponse createJWT(String code) {
         AccessTokenResponse accessToken = getAccessToken(code);
         logger.info("Access Token : {} ", accessToken);
-        OAuthUser OAuthUser = getGithubUser(accessToken);
-        logger.info("User : {} ", OAuthUser);
-        return new JWTResponse(JWTBuilder.create(OAuthUser), OAuthUser);
+        User User = getGithubUser(accessToken);
+        logger.info("User : {} ", User);
+        return new JWTResponse(JWTBuilder.create(User), User);
     }
 
-    public OAuthUser getGithubUser(AccessTokenResponse accessToken) {
+    public User getGithubUser(AccessTokenResponse accessToken) {
         RequestEntity<Void> githubUserRequest = RequestEntity
                 .get(GITHUB_USER_URI)
                 .header("Accept", "application/json")
@@ -43,7 +43,7 @@ public class OAuthService {
                 .build();
 
         return new RestTemplate()
-                .exchange(githubUserRequest, OAuthUser.class).getBody();
+                .exchange(githubUserRequest, User.class).getBody();
     }
 
     public AccessTokenResponse getAccessToken(String code) {

@@ -1,6 +1,6 @@
 package com.team09.airbnb.domain.login;
 
-public class OAuthUser {
+public class User {
     private String login;
     private String name;
 
