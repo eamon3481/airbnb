@@ -3,10 +3,12 @@ package com.team09.airbnb.service;
 import com.team09.airbnb.request.AccessTokenRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 @Service
+@Primary
 public class OAuthWebService extends OAuthService{
 
     private final Logger logger = LoggerFactory.getLogger(OAuthWebService.class);
