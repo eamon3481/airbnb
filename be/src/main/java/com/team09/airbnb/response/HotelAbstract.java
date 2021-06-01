@@ -8,18 +8,18 @@ abstract class HotelAbstract {
     private final String title;
     private final BigDecimal price;
     private final boolean wishlist;
-    private final double longitude;
     private final double latitude;
+    private final double longitude;
     private final int rate;
     private final List<String> details;
 
-    public HotelAbstract(Long hotelId, String title, BigDecimal price, boolean wishlist, double longitude, double latitude, int rate, List<String> details) {
+    public HotelAbstract(Long hotelId, String title, BigDecimal price, boolean wishlist, double latitude, double longitude, int rate, List<String> details) {
         this.hotelId = hotelId;
         this.title = title;
         this.price = price;
         this.wishlist = wishlist;
-        this.longitude = longitude;
         this.latitude = latitude;
+        this.longitude = longitude;
         this.rate = rate;
         this.details = details;
     }

@@ -7,8 +7,8 @@ public class HotelListResponse extends HotelAbstract {
 
     private final String img;
 
-    public HotelListResponse(Long hotelId, String title, BigDecimal price, boolean wishlist, double longitude, double latitude, int rate, List<String> details, String img) {
-        super(hotelId, title, price, wishlist, longitude, latitude, rate, details);
+    public HotelListResponse(Long hotelId, String title, BigDecimal price, boolean wishlist, double latitude, double longitude, int rate, List<String> details, String img) {
+        super(hotelId, title, price, wishlist, latitude, longitude, rate, details);
         this.img = img;
     }
 
