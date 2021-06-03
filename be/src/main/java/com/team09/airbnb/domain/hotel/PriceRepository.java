@@ -1,12 +1,12 @@
 package com.team09.airbnb.domain.hotel;
 
+import com.team09.airbnb.request.PriceRequest;
 import com.team09.airbnb.util.LocationUtil;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +19,7 @@ public class PriceRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<BigDecimal> prices(double latitude, double longitude, Date checkin, Date checkout) {
+    public List<BigDecimal> prices(PriceRequest priceRequest) {
         String sql = "SELECT h.price " +
                 "FROM hotel h " +
                 "LEFT JOIN reservation r on h.hotel_id = r.hotel_id " +
@@ -32,7 +32,7 @@ public class PriceRepository {
                 "   OR :checkin <= r.checkin  AND :checkout > r.checkin" +
                 ");";
 
-        Map<String, Double> area = LocationUtil.getArea(latitude, longitude);
+        Map<String, Double> area = LocationUtil.getArea(priceRequest.getLatitude(), priceRequest.getLongitude());
 
         MapSqlParameterSource parameterSource = new MapSqlParameterSource()
                 .addValue("sw_lat", area.get("sw_lat"))
@@ -40,8 +40,8 @@ public class PriceRepository {
                 .addValue("ne_lat", area.get("ne_lat"))
                 .addValue("ne_lng", area.get("ne_lng"))
 
-                .addValue("checkin", checkin)
-                .addValue("checkout", checkout);
+                .addValue("checkin", priceRequest.getCheckin())
+                .addValue("checkout", priceRequest.getCheckout());
 
         return jdbcTemplate.query(sql, parameterSource, (rs, rowNum) -> rs.getBigDecimal("price"));
     }
