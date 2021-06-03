@@ -15,10 +15,20 @@ public class AllPriceResponse {
     @JsonProperty("max_price")
     private BigDecimal maxPrice = BigDecimal.ZERO;
 
+    @JsonProperty("avg_price")
+    private BigDecimal avgPrice = BigDecimal.ZERO;
+
     public AllPriceResponse(List<BigDecimal> prices) {
         this.prices = prices;
         setMinPrice();
         setMaxPrice();
+        setAvgPrice();
+    }
+
+    private void setAvgPrice() {
+        BigDecimal sum = prices.stream()
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        this.avgPrice = sum.divide(BigDecimal.valueOf(prices.size()));
     }
 
     private void setMinPrice(){
