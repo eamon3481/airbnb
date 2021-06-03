@@ -4,28 +4,25 @@ import com.team09.airbnb.request.HotelRequest;
 import com.team09.airbnb.request.PriceRequest;
 import com.team09.airbnb.response.ApiResponse;
 import com.team09.airbnb.service.HotelService;
-import com.team09.airbnb.service.PriceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class SearchController {
+public class HotelController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final HotelService hotelService;
-    private final PriceService priceService;
 
-    public SearchController(HotelService hotelService, PriceService priceService) {
+    public HotelController(HotelService hotelService) {
         this.hotelService = hotelService;
-        this.priceService = priceService;
     }
 
     @GetMapping("/price")
     public ApiResponse prices(PriceRequest priceRequest) {
-        return new ApiResponse(priceService.prices(priceRequest));
+        return new ApiResponse(hotelService.prices(priceRequest));
     }
 
 
