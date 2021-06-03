@@ -13,8 +13,8 @@ public class ReservedDetailResponse extends HotelDetailResponse {
     private final int children;
     private final int infants;
 
-    public ReservedDetailResponse(Long hotelId, String title, BigDecimal price, boolean wishlist, double longitude, double latitude, int rate, List<String> details, String host, List<String> imgs, Long reservedId, Date checkin, Date checkout, int adults, int children, int infants) {
-        super(hotelId, title, price, wishlist, longitude, latitude, rate, details, host, imgs);
+    public ReservedDetailResponse(Long hotelId, String title, BigDecimal price, boolean wishlist, double longitude, double latitude, int rate, List<String> options, String host, List<String> imgs, Long reservedId, Date checkin, Date checkout, int adults, int children, int infants) {
+        super(hotelId, title, price, wishlist, longitude, latitude, rate, options, host, imgs);
         this.reservedId = reservedId;
         this.checkin = checkin;
         this.checkout = checkout;
