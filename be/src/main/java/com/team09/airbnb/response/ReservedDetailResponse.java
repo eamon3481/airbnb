@@ -1,20 +1,20 @@
 package com.team09.airbnb.response;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ReservedDetailResponse extends HotelDetailResponse {
 
     private final Long reservedId;
-    private final Date checkin;
-    private final Date checkout;
+    private final LocalDate checkin;
+    private final LocalDate checkout;
     private final int adults;
     private final int children;
     private final int infants;
 
-    public ReservedDetailResponse(Long hotelId, String title, BigDecimal price, boolean wishlist, double longitude, double latitude, int rate, List<String> options, String host, List<String> imgs, Long reservedId, Date checkin, Date checkout, int adults, int children, int infants) {
-        super(hotelId, title, price, wishlist, longitude, latitude, rate, options, host, imgs);
+    protected ReservedDetailResponse(Long hotelId, String title, BigDecimal price, boolean wishlist, double longitude, double latitude, int rate, List<String> options, String host, List<String> imgs, Long reservedId, LocalDate checkin, LocalDate checkout, int adults, int children, int infants) {
+        super(hotelId, title, price, wishlist, longitude, latitude, rate, host, options, imgs);
         this.reservedId = reservedId;
         this.checkin = checkin;
         this.checkout = checkout;
@@ -27,11 +27,11 @@ public class ReservedDetailResponse extends HotelDetailResponse {
         return reservedId;
     }
 
-    public Date getCheckin() {
+    public LocalDate getCheckin() {
         return checkin;
     }
 
-    public Date getCheckout() {
+    public LocalDate getCheckout() {
         return checkout;
     }
 
@@ -45,5 +45,9 @@ public class ReservedDetailResponse extends HotelDetailResponse {
 
     public int getInfants() {
         return infants;
+    }
+
+    public static ReservedDetailResponse create(Long hotelId, String title, BigDecimal price, boolean wishlist, double longitude, double latitude, int rate, List<String> options, String host, List<String> imgs, Long reservedId, LocalDate checkin, LocalDate checkout, int adults, int children, int infants){
+        return new ReservedDetailResponse(hotelId, title, price, wishlist, longitude, latitude, rate, options, host, imgs, reservedId, checkin, checkout, adults, children, infants);
     }
 }
