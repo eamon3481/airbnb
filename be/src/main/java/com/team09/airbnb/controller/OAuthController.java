@@ -1,6 +1,7 @@
 package com.team09.airbnb.controller;
 
 import com.team09.airbnb.domain.login.User;
+import com.team09.airbnb.response.ApiResponse;
 import com.team09.airbnb.response.JWTResponse;
 import com.team09.airbnb.service.OAuthIOSService;
 import com.team09.airbnb.service.OAuthWebService;
@@ -26,10 +27,10 @@ public class OAuthController {
     }
 
     @GetMapping("/login")
-    public JWTResponse jwtWebRequest(@RequestParam String code) {
+    public ApiResponse jwtWebRequest(@RequestParam String code) {
         User user = oauthWebService.getUser(code);
         logger.info("User : {} ", user);
-        return new JWTResponse(userSerivce.signIn(user), user);
+        return new ApiResponse(new JWTResponse(userSerivce.signIn(user), user));
     }
 
     @GetMapping("/iOS/login")

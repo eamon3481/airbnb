@@ -7,6 +7,7 @@ import com.team09.airbnb.service.HotelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,9 +32,9 @@ public class HotelController {
         return new ApiResponse(hotelService.findAll(hotelRequest));
     }
 
-//    @GetMapping("/hotels/{hotelId}")
-//    public HotelDetailResponse hotelDetail(@PathVariable Long hotelId) {
-//        return new HotelDetailResponse(hotelId, "C1 New apartment right next to Gangnam Station", BigDecimal.valueOf(79000), false, 37.498063, 127.030187, 4, Arrays.asList("주방", "무선인터넷", "에어컨", "헤어드라이"), "Baba", Arrays.asList("https://team09-airbnb.s3.ap-northeast-2.amazonaws.com/airbnb1-1.png", "https://team09-airbnb.s3.ap-northeast-2.amazonaws.com/airbnb1-2.png", "https://team09-airbnb.s3.ap-northeast-2.amazonaws.com/airbnb1-3.png"));
-//    }
+    @GetMapping("/hotels/{hotelId}")
+    public ApiResponse hotelDetail(@PathVariable Long hotelId) {
+        return new ApiResponse(hotelService.hotelDetail(hotelId, "Woody"));
+    }
 
 }
