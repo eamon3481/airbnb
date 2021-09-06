@@ -14,6 +14,7 @@ public class HotelRequest {
     private int infants;
     private double latitude;
     private double longitude;
+    private String username;
 
     public Date getCheckin() {
         return checkin;
@@ -98,5 +99,9 @@ public class HotelRequest {
 
     public int getOccupancy() {
         return this.adults + this.children + this.infants;
+    }
+
+    public String getUsername() {
+        return "jihye-woo";
     }
 }
